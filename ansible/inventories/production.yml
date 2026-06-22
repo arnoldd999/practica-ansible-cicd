@@ -1,6 +1,6 @@
 all:
   hosts:
     web1:
-      [cite_start]ansible_host: 86.127.231.204
-      [cite_start]ansible_user: deploy [cite: 58]
-      [cite_start]ansible_python_interpreter: /usr/bin/python3 [cite: 59]
+      ansible_host: 86.127.231.204
+      ansible_user: deploy
+      ansible_python_interpreter: /usr/bin/python3
