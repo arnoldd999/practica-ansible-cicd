@@ -1,0 +1,4 @@
+---
+- name: Reload systemd
+  command: systemctl daemon-reload
+  [cite_start]become: yes [cite: 108, 109, 110]

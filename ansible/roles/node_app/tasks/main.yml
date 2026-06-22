@@ -1,0 +1,15 @@
+---
+- name: Ensure git is present
+  apt:
+    name: git
+    state: present
+  [cite_start]become: yes [cite: 62, 63, 64, 65, 66]
+
+- name: Ensure node (and npm) are installed (Debian example)
+  apt:
+    name: nodejs
+    state: present
+  [cite_start]become: yes [cite: 67, 68, 69, 70]
+
+- name: Include deploy tasks
+  [cite_start]import_tasks: deploy.yml [cite: 71, 72]

@@ -1,0 +1,39 @@
+---
+- name: Ensure app dir exists
+  file:
+    path: /home/deploy/apps/myapp
+    state: directory
+    owner: deploy
+    group: deploy
+    [cite_start]mode: '0755' [cite: 74, 75, 76, 77, 78, 79, 80]
+
+- name: Checkout app code from repo (pull latest)
+  git:
+    repo: 'https://github.com/arnoldd999/practica-ansible-cicd.git'
+    dest: /home/deploy/apps/myapp
+    version: "{{ git_ref | default('main') }}"
+    force: yes
+    update: yes
+  vars:
+    ansible_ssh_extra_args: '-o StrictHostKeyChecking=no'
+  [cite_start]become: no [cite: 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
+
+- name: Install npm dependencies
+  npm:
+    path: /home/deploy/apps/myapp
+    [cite_start]production: yes [cite: 91, 92, 93, 94]
+
+- name: Copy systemd service file
+  template:
+    src: node-app.service.j2
+    dest: /etc/systemd/system/myapp.service
+  become: yes
+  notify:
+    - [cite_start]Reload systemd [cite: 95, 96, 97, 98, 99, 100]
+
+- name: Ensure service is started and enabled
+  systemd:
+    name: myapp
+    state: started
+    enabled: yes
+  [cite_start]become: yes [cite: 101, 102, 103, 104, 105, 106]
